@@ -280,9 +280,33 @@ function makeFiveColumns(someBlocks) {
   return newBlocks;
 }
 
+function getQueryVariable(variable) {
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+}
+
+const existingBlocksVar = getQueryVariable("existingBlocks");
+const existingGamesWonVar = getQueryVariable("gamesWon");
+
 if (blocksStored) {
   blocks = JSON.parse(blocksStored);
   localStorage.setItem(`stored-blocks-a${Math.floor(Math.random() * 200)}`, blocksStored);
+  blocks = makeFiveColumns(blocks);
+  let maxRow = blocks.map(function(row){ return Math.max.apply(Math, row); });
+  let max = Math.max.apply(null, maxRow);
+  let min = Math.max(1, max - 8);
+  currentUp = min + Math.floor(Math.random() * 5);
+} else if (existingBlocksVar) {
+  alert("Thank you for porting your game over here. Loading...");
+  blocks = JSON.parse(existingBlocksVar);
+  localStorage.setItem("blocks", JSON.stringify(blocks));
+  localStorage.setItem("gamesWon", existingGamesWonVar);
+  localStorage.setItem(`stored-blocks-a${Math.floor(Math.random() * 200)}`, existingBlocksVar);
   blocks = makeFiveColumns(blocks);
   let maxRow = blocks.map(function(row){ return Math.max.apply(Math, row); });
   let max = Math.max.apply(null, maxRow);
