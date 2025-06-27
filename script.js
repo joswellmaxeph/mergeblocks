@@ -307,6 +307,7 @@ if (blocksStored) {
   localStorage.setItem("blocks", JSON.stringify(blocks));
   localStorage.setItem("gamesWon", existingGamesWonVar);
   localStorage.setItem(`stored-blocks-a${Math.floor(Math.random() * 200)}`, existingBlocksVar);
+  window.location.href = "https://joswellmaxeph.github.io/mergeblocks/"
   blocks = makeFiveColumns(blocks);
   let maxRow = blocks.map(function(row){ return Math.max.apply(Math, row); });
   let max = Math.max.apply(null, maxRow);
