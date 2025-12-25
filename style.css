@@ -14,3 +14,11 @@ html, body {
   font-size: 2px;
   user-select: none;
 }
+
+#msg span:nth-child(2n) {
+  color: red;
+}
+
+#msg span:nth-child(2n+1) {
+  color: green;
+}
